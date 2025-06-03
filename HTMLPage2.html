@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Таджикская кухня</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Тест: Насколько хорошо вы знаете таджикскую кухню?</h1>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="HTMLPage1.html" class="back-btn">Вернуться на главную</a></li>
+        </ul>
+    </nav>
+
+    <main class="quiz-container">
+        <form id="quiz-form">
+            <div class="question">
+                <h3>1. Какое блюдо считается самым главным в таджикской кухне?</h3>
+                <label><input type="radio" name="q1" value="a"> Шашлык</label>
+                <label><input type="radio" name="q1" value="b"> Плов</label>
+                <label><input type="radio" name="q1" value="c"> Манту</label>
+            </div>
+
+            <div class="question">
+                <h3>2. Из чего готовят традиционный курутоб?</h3>
+                <label><input type="radio" name="q2" value="a"> Из риса и мяса</label>
+                <label><input type="radio" name="q2" value="b"> Из лепешек и кислого молока</label>
+                <label><input type="radio" name="q2" value="c"> Из теста и мясного фарша</label>
+            </div>
+
+            <div class="question">
+                <h3>3. Как называется традиционная таджикская лепешка?</h3>
+                <label><input type="radio" name="q3" value="a"> Лаваш</label>
+                <label><input type="radio" name="q3" value="b"> Нон</label>
+                <label><input type="radio" name="q3" value="c"> Чалпак</label>
+            </div>
+
+            <div class="question">
+                <h3>4. Как называется таджикский вариант пирожков?</h3>
+                <label><input type="radio" name="q4" value="a"> Хинкал</label>
+                <label><input type="radio" name="q4" value="b"> Самбуса</label>
+                <label><input type="radio" name="q4" value="c"> Чебурек</label>
+            </div>
+
+            <div class="question">
+                <h3>5. В чем готовят традиционный таджикский нон?</h3>
+                <label><input type="radio" name="q5" value="a"> В духовке</label>
+                <label><input type="radio" name="q5" value="b"> На сковороде</label>
+                <label><input type="radio" name="q5" value="c"> В тандыре</label>
+            </div>
+
+            <button type="button" id="submit-btn">Проверить ответы</button>
+        </form>
+
+        <div id="results" class="hidden">
+            <h2>Ваш результат: <span id="score">0</span>/5</h2>
+            <p id="result-text"></p>
+            <a href="HTMLPage1.html" class="back-btn">Вернуться на главную</a>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('submit-btn').addEventListener('click', function () {
+            const answers = {
+                q1: 'b',
+                q2: 'b',
+                q3: 'b',
+                q4: 'b',
+                q5: 'c'
+            };
+
+            let score = 0;
+
+            for (let i = 1; i <= 5; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === answers[`q${i}`]) {
+                    score++;
+                }
+            }
+
+            document.getElementById('score').textContent = score;
+
+            let resultText = '';
+            if (score === 5) {
+                resultText = 'Превосходно! Вы настоящий знаток таджикской кухни!';
+            } else if (score >= 3) {
+                resultText = 'Хороший результат! Вы многое знаете о таджикской кухне.';
+            } else {
+                resultText = 'Попробуйте ещё раз! Ответы на все вопросы есть на главной странице.';
+            }
+
+            document.getElementById('result-text').textContent = resultText;
+            document.getElementById('results').classList.remove('hidden');
+            document.getElementById('quiz-form').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
